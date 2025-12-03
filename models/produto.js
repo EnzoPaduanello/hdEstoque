@@ -1,7 +1,7 @@
-const { DataTypes, NUMBER } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
-const Material = sequelize.define('Material', {
+const Produto = sequelize.define('Produto', {
     id:{
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -52,13 +52,13 @@ const Material = sequelize.define('Material', {
         field: 'id_colecao'
     },
     preco:{
-        type: DataTypes.REAL(5, 2),
+        type: DataTypes.DECIMAL(5, 2),
         allowNull: true,
         unique: false,
         field: 'preco'
     },
     gastoMaterialMetro:{
-        type: DataTypes.REAL(5, 2),
+        type: DataTypes.DECIMAL(5, 2),
         allowNull: true,
         unique: false,
         field: 'gasto_material_metro'
@@ -68,4 +68,4 @@ const Material = sequelize.define('Material', {
     timestamps: false
 });
 
-module.exports = Material;
+module.exports = Produto;
