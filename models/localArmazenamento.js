@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
-const produtoArmazenamento = sequelize.define('produtoArmazenamento', {
+const localArmazenamento = sequelize.define('localArmazenamento', {
     id:{
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -21,8 +21,9 @@ const produtoArmazenamento = sequelize.define('produtoArmazenamento', {
         field: 'descricao'
     }
 }, {
-    tableName: 'produto_armazenamento',
+    tableName: 'local_armazenamento',
+    schema: 'hd_estoque',
     timestamps: false
 });
 
-module.exports = produtoArmazenamento;
+module.exports = localArmazenamento;

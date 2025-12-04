@@ -22,6 +22,7 @@ const Categoria = sequelize.define('Categoria', {
     }
 }, {
     tableName: 'categoria',
+    schema: 'hd_estoque',
     timestamps: false
 });
 

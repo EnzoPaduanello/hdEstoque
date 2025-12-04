@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Materiais</title>
+    <link rel="stylesheet" href="/css/form.css">
+</head>
+<body>
+    <div class="title-div">
+        <h2>Gerenciamento de Materiais</h2>
+    </div>
+    
+    <div class="pesquisa-form-div">
+        <form class="pesquisa-form" id="pesquisa-form">
+            <label for="pesquisa-input">Digite o nome da material para a pesquisa:</label>
+            <input id="pesquisa-input" class="pesquisa-input">
+
+            <br>
+            
+            <button id="pesquisa-button">Pesquisar</button>
+            <button id="cadastrar-button">Cadastrar Material</button>
+
+            <br>
+            <div id="descricaoPaginaDiv">
+              <p id="descricaoPagina">Para editar ou excluir alguma material, clique na material desejada localizada na lista.</p>
+            </div>
+            <br>
+        </form>
+    </div>
+
+    <div id="list-div" class="list-div">
+        
+    </div>
+    <br>
+
+    <script src="/js/material/gerenciamentoMaterial.js"></script>
+</body>
+</html>

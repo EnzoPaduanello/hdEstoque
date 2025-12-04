@@ -65,6 +65,7 @@ const Produto = sequelize.define('Produto', {
     }
 }, {
     tableName: 'produto',
+    schema: 'hd_estoque',
     timestamps: false
 });
 

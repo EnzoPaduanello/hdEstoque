@@ -22,6 +22,7 @@ const Material = sequelize.define('Material', {
     }
 }, {
     tableName: 'material',
+    schema: 'hd_estoque',
     timestamps: false
 });
 

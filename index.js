@@ -1,5 +1,7 @@
 const express = require('express');
 const sequelize = require('./config/db')
+const path = require('path');
+const bodyParser = require('body-parser')
 
 // --- Importação dos Models ---
 const Material = require('./models/material');
@@ -9,6 +11,13 @@ const Colecao = require('./models/colecao');
 const Produto = require('./models/produto');
 const LocalArmazenamento = require('./models/localArmazenamento');
 const ProdutoLocalArmazenamento = require('./models/produtoLocalArmazenamento');
+
+// --- Importação dos Controllers ---
+const categoriaController = require('./controllers/categoriaController');
+const colecaoController = require('./controllers/colecaoController');
+const corController = require('./controllers/corController');
+const localArmazenamentoController = require('./controllers/localArmazenamentoController');
+const materialController = require('./controllers/materialController');
 
 // --- Definição das Relações (Associações) ---
 
@@ -40,11 +49,52 @@ ProdutoLocalArmazenamento.belongsTo(LocalArmazenamento, { foreignKey: 'idLocalAr
 const app = express();
 const PORT = 3000;
 
-app.use(express.json()); // Permite que o servidor entenda JSON
+// Middleware para parsear o corpo das requisições em JSON
+app.use(bodyParser.json());
+app.use(express.json());
+
+// Middleware para servir arquivos estáticos.
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
+
+app.use('/api', categoriaController);
+app.use('/api', colecaoController);
+app.use('/api', corController);
+app.use('/api', localArmazenamentoController);
+app.use('/api', materialController);
 
 // Teste rápido de rota
 app.get('/', (req, res) => {
     res.send('API do Home Decor Estoque está rodando!');
+});
+
+//Categoria
+app.get('/categoria/cadastro', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'categoria', 'cadastroCategoria.html'));
+});
+
+//Coleção
+app.get('/colecao/cadastro', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'colecao', 'cadastroColecao.html'));
+});
+
+//Cor
+app.get('/cor/cadastro', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'cor', 'cadastroCor.html'));
+});
+
+//Local de Armazenamento
+app.get('/localArmazenamento/cadastro', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'localArmazenamento', 'cadastroLocalArmazenamento.html'));
+});
+
+//Material
+app.get('/material', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'material', 'gerenciamentoMaterial.html'));
+});
+
+app.get('/material/cadastro', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'material', 'cadastroMaterial.html'));
 });
 
 // Middleware para tratamento de erros
