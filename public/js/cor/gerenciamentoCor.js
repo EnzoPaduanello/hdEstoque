@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async function() {
     try{
-        const response = await fetch('/api/material', {
+        const response = await fetch('/api/cor', {
             method:'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -8,12 +8,12 @@ document.addEventListener('DOMContentLoaded', async function() {
         })
 
         if (!response.ok) {
-            throw new Error('Erro ao buscar materiais');
+            throw new Error('Erro ao buscar cores');
         }
 
-        const listaMateriais = await response.json();
+        const listaCores = await response.json();
 
-        criarLista(listaMateriais);
+        criarLista(listaCores);
 
     } catch (error) {
         console.error('Erro na requisição:', error);
@@ -25,30 +25,30 @@ document.addEventListener('DOMContentLoaded', async function() {
     cadastrarButtom.addEventListener('click', function(event) {
         event.preventDefault();
 
-        window.location.assign('/material/cadastro')
+        window.location.assign('/cor/cadastro')
     });
 });
 
-function criarLista(materiais){
+function criarLista(cores){
     const divLista = document.getElementById('list-div');
 
     while (divLista.querySelector('a')) {
         divLista.querySelector('a').remove();
     }
 
-    materiais.forEach(material => {
+    cores.forEach(cor => {
         const aElement = document.createElement('a');
-        aElement.href = '/material/edicao?id=' + material.id;
+        aElement.href = '/cor/edicao?id=' + cor.id;
 
         const ulElement = document.createElement('ul');
-        ulElement.id = material.id;
+        ulElement.id = cor.id;
         ulElement.className = 'dados-list';
 
         const lNome = document.createElement('li');
         const lDescricao = document.createElement('li');
 
-        lNome.textContent = 'Nome: ' + material.nome;
-        lDescricao.textContent = `Descrição: ${material.descricao || ''}`;
+        lNome.textContent = 'Nome: ' + cor.nome;
+        lDescricao.textContent = `Descrição: ${cor.descricao || ''}`;
 
         ulElement.appendChild(lNome);
         ulElement.appendChild(lDescricao);

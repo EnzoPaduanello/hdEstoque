@@ -79,8 +79,16 @@ app.get('/colecao/cadastro', (req, res) => {
 });
 
 //Cor
+app.get('/cor', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'cor', 'gerenciamentoCor.html'));
+});
+
 app.get('/cor/cadastro', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'cor', 'cadastroCor.html'));
+});
+
+app.get('/cor/edicao', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'cor', 'edicaoCor.html'));
 });
 
 //Local de Armazenamento
@@ -95,6 +103,10 @@ app.get('/material', (req, res) => {
 
 app.get('/material/cadastro', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'material', 'cadastroMaterial.html'));
+});
+
+app.get('/material/edicao', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'material', 'edicaoMaterial.html'));
 });
 
 // Middleware para tratamento de erros
