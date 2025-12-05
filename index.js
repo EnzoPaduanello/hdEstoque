@@ -18,6 +18,7 @@ const colecaoController = require('./controllers/colecaoController');
 const corController = require('./controllers/corController');
 const localArmazenamentoController = require('./controllers/localArmazenamentoController');
 const materialController = require('./controllers/materialController');
+const produtoController = require('./controllers/produtoContoller');
 
 // --- Definição das Relações (Associações) ---
 
@@ -62,6 +63,7 @@ app.use('/api', colecaoController);
 app.use('/api', corController);
 app.use('/api', localArmazenamentoController);
 app.use('/api', materialController);
+app.use('/api', produtoController);
 
 // Teste rápido de rota
 app.get('/', (req, res) => {
@@ -69,13 +71,29 @@ app.get('/', (req, res) => {
 });
 
 //Categoria
+app.get('/categoria', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'categoria', 'gerenciamentoCategoria.html'));
+});
+
 app.get('/categoria/cadastro', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'categoria', 'cadastroCategoria.html'));
 });
 
+app.get('/categoria/edicao', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'categoria', 'edicaoCategoria.html'));
+});
+
 //Coleção
+app.get('/colecao', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'colecao', 'gerenciamentoColecao.html'));
+});
+
 app.get('/colecao/cadastro', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'colecao', 'cadastroColecao.html'));
+});
+
+app.get('/colecao/edicao', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'colecao', 'edicaoColecao.html'));
 });
 
 //Cor
@@ -92,8 +110,16 @@ app.get('/cor/edicao', (req, res) => {
 });
 
 //Local de Armazenamento
+app.get('/localArmazenamento', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'localArmazenamento', 'gerenciamentoLocalArmazenamento.html'));
+});
+
 app.get('/localArmazenamento/cadastro', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'localArmazenamento', 'cadastroLocalArmazenamento.html'));
+});
+
+app.get('/localArmazenamento/edicao', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'localArmazenamento', 'edicaoLocalArmazenamento.html'));
 });
 
 //Material
@@ -107,6 +133,11 @@ app.get('/material/cadastro', (req, res) => {
 
 app.get('/material/edicao', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'material', 'edicaoMaterial.html'));
+});
+
+//Produto
+app.get('/produto/cadastro', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'produto', 'cadastroProduto.html'));
 });
 
 // Middleware para tratamento de erros

@@ -11,33 +11,33 @@ document.addEventListener('DOMContentLoaded', function(){
         const nome = document.getElementById('nomeInput').value.trim().toUpperCase();
         const descricao = document.getElementById('descricaoInput').value.trim();
 
-        const materialData = {
+        const categoriaData = {
             nome
         }
 
         if(descricao.length > 0){
-            materialData.descricao = descricao
+            categoriaData.descricao = descricao
         }
 
-        console.log(materialData)
+        console.log(categoriaData)
             
         try{
-            const response = await fetch(`/api/material/${id}`, {
+            const response = await fetch(`/api/categoria/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(materialData)
+                body: JSON.stringify(categoriaData)
             });
 
             if (!response.ok) {
-                throw new Error('Erro ao editar material');
+                throw new Error('Erro ao editar categoria');
             }
 
             const result = await response.json(); // Resposta do servidor
             
             console.log('Sucesso:', result);
-            alert('Material editado com sucesso!');
+            alert('Categoria editada com sucesso!');
         } catch (error) {
             console.error('Erro na requisição:', error);
             alert('Falha ao conectar com o servidor.');
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 async function carregarDados(id){
     try{
-        const response = await fetch(`/api/material/${id}`, {
+        const response = await fetch(`/api/categoria/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -55,16 +55,16 @@ async function carregarDados(id){
         });
 
         if (!response.ok) {
-            throw new Error('Erro ao carregar dados do material');
+            throw new Error('Erro ao carregar dados da categoria');
         }
 
-        const material = await response.json();
+        const categoria = await response.json();
 
-        document.getElementById('nomeInput').value = material.nome;
-        document.getElementById('descricaoInput').value = material.descricao || '';
+        document.getElementById('nomeInput').value = categoria.nome;
+        document.getElementById('descricaoInput').value = categoria.descricao || '';
     } catch (error) {
         console.error('Erro ao carregar dados:', error);
-        alert('Falha ao carregar dados do material.');
+        alert('Falha ao carregar dados da categoria.');
     }
 }
 

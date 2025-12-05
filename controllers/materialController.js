@@ -49,7 +49,7 @@ router.put('/material/:id', async (req, res) => {
         }
 
         material.nome = nome;
-        material.descricao = descricao;
+        material.descricao = descricao || null;
         await material.save();
 
         res.json({ success: true, material });

@@ -65,7 +65,7 @@ body {
     align-items: center;
     text-align: center;
 }
-
+/*
 .dadosSelect {
     position: relative;
     top: 15%;
@@ -73,7 +73,7 @@ body {
     transform: translate(-50%, -50%);
 
     display: flex;
-    justify-content: center;  /* Centraliza horizontalmente */
+    justify-content: center;  
     align-items: center;
     text-align: center;
 
@@ -127,6 +127,7 @@ body {
   .dadosSelect select option :hover ::before {
     color: #000;
   }
+*/
 
   .title-div {
     text-align: center;
@@ -224,4 +225,55 @@ body {
     justify-content: center;
     max-width: 715px;
     width: 90% auto;
+}
+
+/* Caixa visível do select2 */
+.select2-container--default .select2-selection--single {
+  background-color: rgb(2, 32, 58);
+  color: #fff;
+  padding: 1px;
+  height: auto;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  width: 300px;
+}
+
+.select2-selection__placeholder {
+  color: #fff;
+}
+
+/* Texto dentro do select2 */
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: #fff;
+  line-height: 1.5;
+  text-align: left;     
+}
+
+/* Seta do lado direito */
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 100%;
+  right: 10px;
+}
+
+/* Opções do dropdown */
+.select2-container--default .select2-results__option {
+  padding: 15px;
+  font-size: 15px;
+  background-color: #8b8b8b;
+  color: #fff;
+  border: 1px solid #161616;
+  border-radius: 3px;
+}
+
+/* Hover nas opções */
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: #062f4f;
+  color: #fff;
+}
+
+.select2-container--default .select2-dropdown {
+  background-color: #111827;
+  border: none;
 }

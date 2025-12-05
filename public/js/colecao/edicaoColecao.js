@@ -11,33 +11,33 @@ document.addEventListener('DOMContentLoaded', function(){
         const nome = document.getElementById('nomeInput').value.trim().toUpperCase();
         const descricao = document.getElementById('descricaoInput').value.trim();
 
-        const materialData = {
+        const colecaoData = {
             nome
         }
 
         if(descricao.length > 0){
-            materialData.descricao = descricao
+            colecaoData.descricao = descricao
         }
 
-        console.log(materialData)
+        console.log(colecaoData)
             
         try{
-            const response = await fetch(`/api/material/${id}`, {
+            const response = await fetch(`/api/colecao/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(materialData)
+                body: JSON.stringify(colecaoData)
             });
 
             if (!response.ok) {
-                throw new Error('Erro ao editar material');
+                throw new Error('Erro ao editar coleção');
             }
 
             const result = await response.json(); // Resposta do servidor
             
             console.log('Sucesso:', result);
-            alert('Material editado com sucesso!');
+            alert('Coleção editada com sucesso!');
         } catch (error) {
             console.error('Erro na requisição:', error);
             alert('Falha ao conectar com o servidor.');
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 async function carregarDados(id){
     try{
-        const response = await fetch(`/api/material/${id}`, {
+        const response = await fetch(`/api/colecao/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -55,16 +55,16 @@ async function carregarDados(id){
         });
 
         if (!response.ok) {
-            throw new Error('Erro ao carregar dados do material');
+            throw new Error('Erro ao carregar dados da coleção');
         }
 
-        const material = await response.json();
+        const colecao = await response.json();
 
-        document.getElementById('nomeInput').value = material.nome;
-        document.getElementById('descricaoInput').value = material.descricao || '';
+        document.getElementById('nomeInput').value = colecao.nome;
+        document.getElementById('descricaoInput').value = colecao.descricao || '';
     } catch (error) {
         console.error('Erro ao carregar dados:', error);
-        alert('Falha ao carregar dados do material.');
+        alert('Falha ao carregar dados da coleção.');
     }
 }
 

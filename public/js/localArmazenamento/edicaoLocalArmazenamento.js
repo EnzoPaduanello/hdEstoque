@@ -11,33 +11,33 @@ document.addEventListener('DOMContentLoaded', function(){
         const nome = document.getElementById('nomeInput').value.trim().toUpperCase();
         const descricao = document.getElementById('descricaoInput').value.trim();
 
-        const materialData = {
+        const localArmazenamentoData = {
             nome
         }
 
         if(descricao.length > 0){
-            materialData.descricao = descricao
+            localArmazenamentoData.descricao = descricao
         }
 
-        console.log(materialData)
+        console.log(localArmazenamentoData)
             
         try{
-            const response = await fetch(`/api/material/${id}`, {
+            const response = await fetch(`/api/localArmazenamento/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(materialData)
+                body: JSON.stringify(localArmazenamentoData)
             });
 
             if (!response.ok) {
-                throw new Error('Erro ao editar material');
+                throw new Error('Erro ao editar local de armazenamento');
             }
 
             const result = await response.json(); // Resposta do servidor
             
             console.log('Sucesso:', result);
-            alert('Material editado com sucesso!');
+            alert('Local de armazenamento editado com sucesso!');
         } catch (error) {
             console.error('Erro na requisição:', error);
             alert('Falha ao conectar com o servidor.');
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 async function carregarDados(id){
     try{
-        const response = await fetch(`/api/material/${id}`, {
+        const response = await fetch(`/api/localArmazenamento/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -55,16 +55,16 @@ async function carregarDados(id){
         });
 
         if (!response.ok) {
-            throw new Error('Erro ao carregar dados do material');
+            throw new Error('Erro ao carregar dados do local de armazenamento');
         }
 
-        const material = await response.json();
+        const localArmazenamento = await response.json();
 
-        document.getElementById('nomeInput').value = material.nome;
-        document.getElementById('descricaoInput').value = material.descricao || '';
+        document.getElementById('nomeInput').value = localArmazenamento.nome;
+        document.getElementById('descricaoInput').value = localArmazenamento.descricao || '';
     } catch (error) {
         console.error('Erro ao carregar dados:', error);
-        alert('Falha ao carregar dados do material.');
+        alert('Falha ao carregar dados do local de armazenamento.');
     }
 }
 
