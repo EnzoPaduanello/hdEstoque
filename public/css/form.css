@@ -65,69 +65,6 @@ body {
     align-items: center;
     text-align: center;
 }
-/*
-.dadosSelect {
-    position: relative;
-    top: 15%;
-    left: 15%;
-    transform: translate(-50%, -50%);
-
-    display: flex;
-    justify-content: center;  
-    align-items: center;
-    text-align: center;
-
-    width: 30%;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #8b8b8b;
-    border-radius: 10px;
-    text-align: center;
-  }
-  
-  .dadosSelect select {
-    background-color: #158F42;
-    color: #fff;
-    padding: 12px;
-    width: 250px;
-    border: none;
-    font-size: 20px;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-    -webkit-appearance: button;
-    appearance: button;
-    outline: none;
-  }
-  
-  .dadosSelect::before {
-    content: "\f13a";
-    font-family: FontAwesome;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 20%;
-    height: 100%;
-    text-align: center;
-    font-size: 28px;
-    line-height: 45px;
-    color: rgba(255, 255, 255, 0.5);
-    background-color: rgba(255, 255, 255, 0.1);
-    pointer-events: none;
-  }
-  
-  .dadosSelect:hover::before {
-    color: rgba(255, 255, 255, 0.6);
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-  
-  .dadosSelect select option {
-    padding: 30px;
-    font-size: 15px;
-  }
-
-  .dadosSelect select option :hover ::before {
-    color: #000;
-  }
-*/
 
   .title-div {
     text-align: center;
@@ -276,4 +213,81 @@ body {
 .select2-container--default .select2-dropdown {
   background-color: #111827;
   border: none;
+}
+
+/* O Card agora é uma linha horizontal */
+.card-local {
+    background-color: #fff;
+    border: 1px solid #8b8b8b;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    
+    /* Flexbox para alinhar lado a lado */
+    display: flex;
+    flex-direction: row; 
+    align-items: flex-end; /* Alinha tudo pela parte de baixo (perto da linha) */
+    gap: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Container para Label + Input */
+.card-local .campo-linha {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+/* --- FORÇANDO ALTURAS IGUAIS (CRUCIAL) --- */
+
+/* 1. Ajuste do Input dentro do Card */
+.card-local input.input {
+    height: 40px !important; /* Altura fixa */
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.card-local .select2-selection__arrow {
+    display: none !important;
+}
+
+/* 2. Ajuste do Select2 dentro do Card */
+.card-local .select2-container .select2-selection--single {
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important; /* Centraliza Verticalmente */
+    align-content: center !important;
+    /* justify-content: center !important;  <-- Descomente essa linha se quiser o texto no meio horizontalmente também */
+    border: 2px solid #8b8b8b !important;
+    border-radius: 10px !important; /* Garante que a borda fique arredondada igual ao input */
+}
+
+/* Centraliza o texto dentro do Select2 */
+.card-local .select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: normal !important; /* Reseta a linha para o flexbox funcionar */
+    padding-left: 10px !important;  /* Espaçamento da esquerda */
+    padding-right: 10px !important;
+    width: 100%; /* Ocupa todo o espaço para o clique funcionar bem */
+}
+
+/* 3. Ajuste do Botão X */
+.btn-remover-linha {
+    background-color: #c91e1e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 40px !important;  /* Largura fixa */
+    height: 40px !important; /* Mesma altura do input */
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0px; /* Garante alinhamento */
+    transition: background 0.2s;
+}
+
+.btn-remover-linha:hover {
+    background-color: #a01818;
 }

@@ -140,6 +140,14 @@ app.get('/produto/cadastro', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'produto', 'cadastroProduto.html'));
 });
 
+app.get('/produto', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'produto', 'gerenciamentoProduto.html'));
+});
+
+app.get('/produto/edicao', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'produto', 'edicaoProduto.html'));
+});
+
 // Middleware para tratamento de erros
 app.use((err, req, res, next) => {
     console.error(err.stack); // Loga o erro no console
