@@ -67,7 +67,7 @@ app.use('/api', produtoController);
 
 // Teste rápido de rota
 app.get('/', (req, res) => {
-    res.send('API do Home Decor Estoque está rodando!');
+    res.sendFile(path.join(__dirname, 'views', 'menu.html'));;
 });
 
 //Categoria

@@ -1,0 +1,98 @@
+body {
+    background-color: #D9D9D9;
+    margin: 0;
+    padding: 0;
+}
+
+#pageDiv {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#formularioContainer {
+    width: 90%;
+    max-width: 614px;
+    position: relative;
+    background: #4f0252;
+    border-radius: 20px;
+    padding: 40px;
+    margin: 0 auto;
+}
+
+button {
+    width: 100%;
+    height: 50px;
+    background: rgba(33.50, 187, 90.12, 0.80);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    border: 3px solid rgba(149, 77, 49, 0.35);
+    color: white;
+    font-size: 24px;
+    font-family: Inter;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+#esqueciASenha, #voltarPaginaLogin{
+    color: white;
+    font-size: 18px;
+    font-family: Inter;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: underline;
+    text-align: center;
+    display: block;
+    margin-top: 20px; 
+}
+
+#descricaoPaginaDiv{
+    background: rgba(33.50, 187, 90.12, 0.80); 
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);  
+    border: 5px rgba(82, 23, 0, 0.35) solid;
+    text-align: center;
+    justify-content: center;
+}
+
+p{
+    color: white;
+}
+
+ul{
+    list-style-type: none;
+    margin-left: -33px;
+}
+
+li{
+    margin-top: 10px;
+}
+
+.nav-button{
+    width: 100%;
+    height: 50px;
+    background: rgba(0, 102, 133, 0.8);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    border: 3px solid rgba(0, 0, 0, 0.699);
+    color: white;
+    font-size: 24px;
+    font-family: Inter;
+    font-weight: 400;
+    cursor: pointer;
+
+}
+
+#mensagem{
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .nav-button{
+        height: 75px;
+    }
+    
+}

@@ -116,6 +116,24 @@ document.addEventListener('DOMContentLoaded', async function() {
             alert('Erro ao salvar.');
         }
     })
+
+    document.getElementById('delete-button').addEventListener('click', async function() {
+        if(!confirm("Tem certeza que deseja deletar este produto? Esta ação não pode ser desfeita."));
+        try {
+            const response = await fetch(`/api/produto/${idProduto}`, {
+                method: 'DELETE'
+            });
+            if (response.ok) {
+                alert('Produto deletado com sucesso.');
+                window.location.assign('/produto');
+            } else {
+                alert('Erro ao deletar o produto.');
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Erro de conexão ao tentar deletar o produto.');
+        }
+    });
 });
 
 async function buscarDadosProduto(idProduto) {

@@ -1,3 +1,5 @@
+let listaCompleta = [];
+
 document.addEventListener('DOMContentLoaded', async function() {
     try{
         const response = await fetch('/api/categoria', {
@@ -13,6 +15,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         const listaCategorias = await response.json();
 
+        listaCompleta = listaCategorias;
+
         criarLista(listaCategorias);
 
     } catch (error) {
@@ -27,6 +31,23 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         window.location.assign('/categoria/cadastro')
     });
+
+    const btnPesquisa = document.getElementById('pesquisa-button');
+    const inputPesquisa = document.getElementById('pesquisa-input');
+
+    if(btnPesquisa) {
+        btnPesquisa.addEventListener('click', function(event) {
+            event.preventDefault();
+            const termo = inputPesquisa.value.toLowerCase().trim();
+
+            // Filtro Simples
+            const filtrados = listaCompleta.filter(item => 
+                item.nome.toLowerCase().includes(termo)
+            );
+
+            criarLista(filtrados);
+        });
+    }
 });
 
 function criarLista(categorias){
