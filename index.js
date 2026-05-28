@@ -160,7 +160,7 @@ app.listen(PORT, async () => {
     
     try {
         await sequelize.authenticate();
-        console.log('Banco de dados conectado no esquema hd_estoque!');
+        console.log('Banco de dados conectado no esquema public!');
     } catch (error) {
         console.error('Falha ao conectar no banco:', error);
     }

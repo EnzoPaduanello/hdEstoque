@@ -22,7 +22,7 @@ const Colecao = sequelize.define('Colecao', {
     }
 }, {
     tableName: 'colecao',
-    schema: 'hd_estoque',
+    schema: 'public',
     timestamps: false
 });
 

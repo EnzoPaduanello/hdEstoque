@@ -22,7 +22,7 @@ const localArmazenamento = sequelize.define('localArmazenamento', {
     }
 }, {
     tableName: 'local_armazenamento',
-    schema: 'hd_estoque',
+    schema: 'public',
     timestamps: false
 });
 

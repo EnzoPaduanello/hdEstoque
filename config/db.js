@@ -1,13 +1,13 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('postgres', 'postgres', 'postgres', {
+const sequelize = new Sequelize('hdestoque', 'postgres', 'postgres', {
     host: 'localhost',
     port: 5432, 
     dialect: 'postgres',
     dialectOptions: {
         // --- ADIÇÃO IMPORTANTE ---
         // Isso força o Sequelize a procurar as tabelas no seu esquema criado
-        searchPath: 'hd_estoque' 
+        searchPath: 'public' 
     },
     pool: {
         max: 5, 

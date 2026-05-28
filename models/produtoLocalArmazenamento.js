@@ -35,7 +35,7 @@ const produtoLocalArmazenamento = sequelize.define('produtoLocalArmazenamento', 
     }
 }, {
     tableName: 'produto_local_armazenamento',
-    schema: 'hd_estoque',
+    schema: 'public',
     timestamps: false
 });
 

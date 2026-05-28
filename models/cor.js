@@ -22,7 +22,7 @@ const Cor = sequelize.define('Cor', {
     }
 }, {
     tableName: 'cor',
-    schema: 'hd_estoque',
+    schema: 'public',
     timestamps: false
 });
 

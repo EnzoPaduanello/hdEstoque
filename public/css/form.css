@@ -1,43 +1,70 @@
+/* =========================================
+   Home Decor - Botanical & Cozy Palette 
+   ========================================= */
+
 body {
-    background-color: #D9D9D9;
+    background-color: #6B7F72; /* Cozy Sage/Olive Green */
     margin: 0;
     padding: 0;
+    font-family: 'Inter', sans-serif;
+    color: #2C352E;
 }
 
+/* Transform the main container into the elegant card */
 .container-form {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 40px 30px;
+    background: #FAFAFA; /* Crisp linen white */
+    border-radius: 20px;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.15);
+    border-top: 8px solid #D1846A; /* Terracotta accent */
+    box-sizing: border-box;
 }
 
 .form {
-    margin-top: 50px;
+    margin-top: 20px;
     align-items: center;
     text-align: center;
 }
 
 .input-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .label {
     display: block;
-    margin-bottom: 10px;
-    font-size: 20px;
-    color: #333;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #4A574E; /* Dark muted green */
+    text-align: center;
 }
 
 .input {
     width: 60%;
-    padding: 10px;
+    padding: 12px;
     font-size: 16px;
-    border: 2px solid #8b8b8b;
+    color: #2C352E;
+    background-color: #FFFFFF;
+    border: 1px solid #D2D9D3; /* Soft light border */
     border-radius: 10px;
     text-align: center;
+    transition: border-color 0.3s ease;
+    box-shadow: inset 0px 2px 4px rgba(0,0,0,0.02);
 }
 
+.input:focus {
+    outline: none;
+    border-color: #6B7F72; /* Sage green focus */
+}
+
+/* =========================================
+   Buttons
+   ========================================= */
+
 .button-container {
-    margin-top: 15px;
+    margin-top: 25px;
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -46,46 +73,52 @@ body {
 .submit-button {
     width: 200px;
     height: 50px;
-    background-color: rgba(0, 102, 133, 0.8);
-    color: #fff;
-    border: solid 2px black;
-    border-radius: 25px;
-    font-size: 20px;
+    background-color: #6B7F72; /* Primary Action: Sage Green */
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
     margin-bottom: 10px;
+    box-shadow: 0px 4px 10px rgba(107, 127, 114, 0.3);
 }
 
 .submit-button:hover {
-    background-color: rgba(0, 84, 109, 0.8);
+    background-color: #55665B;
+    transform: translateY(-2px);
 }
 
 .delete-button {
     width: 200px;
     height: 50px;
-    background-color: rgba(109, 0, 0, 0.8);
-    color: #fff;
-    border: solid 2px black;
-    border-radius: 25px;
-    font-size: 20px;
+    background-color: #D1846A; /* Destructive Action: Terracotta */
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
     margin-bottom: 10px;
+    box-shadow: 0px 4px 10px rgba(209, 132, 106, 0.3);
 }
 
 .delete-button:hover {
-    background-color: rgba(102, 0, 0, 0.8);
+    background-color: #B56D56;
+    transform: translateY(-2px);
 }
 
-.select-div{
-    display: flex;
-    justify-content: center;  /* Centraliza horizontalmente */
-    align-items: center;
-    text-align: center;
-}
+/* =========================================
+   Lists & Page Descriptions
+   ========================================= */
 
-  .title-div {
+.title-div {
     text-align: center;
+    color: #2C352E;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 30px;
 }
 
 .list-div {
@@ -93,175 +126,256 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 20px; /* Gives the cards more breathing room */
+    width: 100%;
 }
 
 .list-div a {
     display: block;
-    width: 90%;
-    max-width: 600px; 
-    margin-bottom: 10px;
+    width: 100%;
+    max-width: 650px; /* Made slightly wider to fit the text better */
     text-decoration: none;
     color: inherit;
 }
 
+/* The main card for each product */
 .dados-list {
     position: relative;
-    padding: 10px;
-    border: 1px solid #000000;
-    margin-bottom: -15px;
-    list-style-type: none;
-    background-color: #f9f9f9;
-    border-radius: 5px;
+    padding: 25px 30px;
+    border: 1px solid #D2D9D3;
+    background-color: #FFFFFF;
+    border-radius: 16px;
     text-align: left;
+    transition: all 0.3s ease;
+    list-style-type: none; /* Removes the ugly browser bullet points */
+    margin: 0;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.03); /* Soft resting shadow */
 }
 
+/* Hover effect for the card */
+.dados-list:hover {
+    box-shadow: 0px 10px 25px rgba(107, 127, 114, 0.15); /* Sage green glowing shadow */
+    border-color: #6B7F72;
+    transform: translateY(-3px); /* Lifts the card up slightly */
+}
 
-.delete-button {
+/* Styling the individual detail rows inside the product card */
+.dados-list li {
+    font-size: 15px;
+    color: #5A6B5D; 
+    padding: 10px 0;
+    border-bottom: 1px dashed #E5EBE6; /* Soft dashed line separating details */
+}
+
+/* The Title (Nome) - Targets the first <li> in the list automatically */
+.dados-list li:first-child {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2C352E;
+    border-bottom: 2px solid #D1846A; /* Terracotta accent line under the title */
+    padding-bottom: 12px;
+    margin-bottom: 5px;
+}
+
+/* The Stock (Disponível para fazer) - Targets the last <li> automatically */
+.dados-list li:last-child {
+    border-bottom: none; /* Removes the dashed line at the very bottom */
+    padding-bottom: 0;
+    font-weight: 600;
+    color: #4A574E;
+    margin-top: 5px;
+}
+
+/* Small Delete Icon Button inside lists */
+button.delete-button-icon {
     position: absolute;
-    top: 30%;
-    right: 10px;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
     background-color: transparent;
     border: none;
     cursor: pointer;
+    box-shadow: none;
+    width: auto;
+    height: auto;
+    padding: 0;
 }
 
-.delete-button img {
-    width: 25px;  /* Ajuste o tamanho da imagem conforme necessário */
-    height: 25px;
+button.delete-button-icon img {
+    width: 24px;
+    height: 24px;
+    transition: opacity 0.3s;
 }
 
-.delete-button:hover img {
-    opacity: 0.7;  /* Efeito hover opcional */
+button.delete-button-icon:hover img {
+    opacity: 0.6;
 }
+
+/* =========================================
+   Search Form
+   ========================================= */
 
 .pesquisa-form-div {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     width: 100%;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .pesquisa-form-div input {
-    width: 90%; 
+    width: 100%; 
     max-width: 400px; 
-    padding: 7px;
+    padding: 12px;
     font-size: 16px;
-    border: 2px solid #8b8b8b;
+    border: 1px solid #D2D9D3;
     border-radius: 10px;
     text-align: left;
     margin-top: 10px;
 }
 
-.pesquisa-form-div input:focus{
-    outline: 2px solid black;
+.pesquisa-form-div input:focus {
+    outline: none;
+    border-color: #6B7F72;
 }
 
-.pesquisa-form-div button{
-    width: 200px;
-    height: 35px;
-    background-color: rgba(0, 102, 133, 0.8);
-    color: #fff;
+.pesquisa-form-div button {
+    width: auto;
+    padding: 0 25px;
+    height: 45px;
+    background-color: #6B7F72;
+    color: #FFFFFF;
     border: none;
-    border-radius: 25px;
+    border-radius: 10px;
     font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-bottom: 10px;
+    transition: all 0.3s ease;
     margin-top: 10px;
 }
 
-#descricaoPaginaDiv{
-    background: rgba(0, 90, 117, 0.8); 
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);  
-    border: 5px rgba(82, 23, 0, 0.35) solid;
+.pesquisa-form-div button:hover {
+    background-color: #55665B;
+}
+
+#descricaoPaginaDiv {
+    background: #FFFFFF; 
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.08);  
+    border-radius: 16px;
+    border-top: 6px solid #6B7F72; /* Sage accent */
     text-align: center;
     justify-content: center;
     max-width: 715px;
-    width: 90% auto;
-    color: white;
+    width: 90%;
+    margin: 0 auto 30px auto;
+    color: #2C352E;
+    padding: 20px;
+    font-weight: 500;
 }
 
-/* Caixa visível do select2 */
+/* =========================================
+   Select2 Overrides (Light & Modern)
+   ========================================= */
+
+/* Ensure the wrapper matches the 60% width of regular inputs */
+.dadosSelect {
+    width: 60%; 
+    margin: 0 auto; /* Centers the select box */
+}
+
+.select2-container {
+    width: 100% !important;
+    text-align: left;
+}
+
 .select2-container--default .select2-selection--single {
-  background-color: rgb(2, 32, 58);
-  color: #fff;
-  padding: 1px;
-  height: auto;
-  border: none;
-  border-radius: 10px;
-  font-size: 20px;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-  width: 300px;
+    background-color: #FFFFFF !important;
+    color: #2C352E !important;
+    padding: 0px !important;
+    height: 45px !important; /* FIX: Was 'auto', which collapsed the box */
+    border: 1px solid #D2D9D3 !important;
+    border-radius: 10px !important;
+    font-size: 16px !important;
+    box-shadow: inset 0px 2px 4px rgba(0,0,0,0.02) !important;
+    display: flex !important;
+    align-items: center !important;
 }
 
 .select2-selection__placeholder {
-  color: #fff;
+    color: #9C8C83 !important;
 }
 
-/* Texto dentro do select2 */
 .select2-container--default .select2-selection--single .select2-selection__rendered {
-  color: #fff;
-  line-height: 1.5;
-  text-align: left;     
+    color: #2C352E !important;
+    line-height: normal !important; 
+    padding-left: 15px !important;
+    width: 100%;
 }
 
-/* Seta do lado direito */
 .select2-container--default .select2-selection--single .select2-selection__arrow {
-  height: 100%;
-  right: 10px;
-}
-
-/* Opções do dropdown */
-.select2-container--default .select2-results__option {
-  padding: 15px;
-  font-size: 15px;
-  background-color: #8b8b8b;
-  color: #fff;
-  border: 1px solid #161616;
-  border-radius: 3px;
-}
-
-/* Hover nas opções */
-.select2-container--default .select2-results__option--highlighted[aria-selected] {
-  background-color: #062f4f;
-  color: #fff;
+    height: 100% !important;
+    right: 15px !important;
+    top: 0 !important;
+    display: flex !important;
+    align-items: center !important;
 }
 
 .select2-container--default .select2-dropdown {
-  background-color: #111827;
-  border: none;
+    background-color: #FFFFFF !important;
+    border: 1px solid #D2D9D3 !important;
+    border-radius: 10px !important;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.1) !important;
+    overflow: hidden;
 }
 
-/* O Card agora é uma linha horizontal */
+.select2-container--default .select2-results__option {
+    padding: 12px 15px !important;
+    font-size: 15px !important;
+    background-color: #FFFFFF !important;
+    color: #4A574E !important;
+    border-bottom: 1px solid #F0F0F0 !important;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #F4F6F4 !important; /* Light sage hover */
+    color: #2C352E !important;
+}
+
+/* =========================================
+   Card Local (Inline Form Rows)
+   ========================================= */
+
 .card-local {
-    background-color: #fff;
-    border: 1px solid #8b8b8b;
-    border-radius: 10px;
-    padding: 15px;
+    background-color: #FFFFFF;
+    border: 1px solid #D2D9D3;
+    border-radius: 12px;
+    padding: 20px;
     margin-bottom: 15px;
-    
-    /* Flexbox para alinhar lado a lado */
     display: flex;
     flex-direction: row; 
-    align-items: flex-end; /* Alinha tudo pela parte de baixo (perto da linha) */
+    align-items: flex-end; 
     gap: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
 }
 
-/* Container para Label + Input */
 .card-local .campo-linha {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    width: 100%;
 }
 
-/* --- FORÇANDO ALTURAS IGUAIS (CRUCIAL) --- */
+.card-local .label {
+    text-align: left;
+    font-size: 14px;
+}
 
-/* 1. Ajuste do Input dentro do Card */
+/* Forcing equal heights */
 .card-local input.input {
-    height: 40px !important; /* Altura fixa */
+    height: 45px !important; 
     margin: 0;
     width: 100%;
     box-sizing: border-box;
@@ -271,42 +385,39 @@ body {
     display: none !important;
 }
 
-/* 2. Ajuste do Select2 dentro do Card */
 .card-local .select2-container .select2-selection--single {
-    height: 40px !important;
+    height: 45px !important;
     display: flex !important;
-    align-items: center !important; /* Centraliza Verticalmente */
+    align-items: center !important; 
     align-content: center !important;
-    /* justify-content: center !important;  <-- Descomente essa linha se quiser o texto no meio horizontalmente também */
-    border: 2px solid #8b8b8b !important;
-    border-radius: 10px !important; /* Garante que a borda fique arredondada igual ao input */
+    border: 1px solid #D2D9D3 !important;
+    border-radius: 10px !important; 
 }
 
-/* Centraliza o texto dentro do Select2 */
 .card-local .select2-container--default .select2-selection--single .select2-selection__rendered {
-    line-height: normal !important; /* Reseta a linha para o flexbox funcionar */
-    padding-left: 10px !important;  /* Espaçamento da esquerda */
-    padding-right: 10px !important;
-    width: 100%; /* Ocupa todo o espaço para o clique funcionar bem */
+    line-height: normal !important; 
+    padding-left: 15px !important;  
+    padding-right: 15px !important;
+    width: 100%; 
 }
 
-/* 3. Ajuste do Botão X */
 .btn-remover-linha {
-    background-color: #c91e1e;
+    background-color: #D1846A; /* Terracotta */
     color: white;
     border: none;
-    border-radius: 5px;
-    width: 40px !important;  /* Largura fixa */
-    height: 40px !important; /* Mesma altura do input */
+    border-radius: 10px;
+    width: 45px !important;  
+    height: 45px !important; 
     cursor: pointer;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 0px; /* Garante alinhamento */
-    transition: background 0.2s;
+    margin-bottom: 0px; 
+    transition: all 0.2s;
 }
 
 .btn-remover-linha:hover {
-    background-color: #a01818;
+    background-color: #B56D56;
+    transform: translateY(-2px);
 }

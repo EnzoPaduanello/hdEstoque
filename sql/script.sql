@@ -1,28 +1,28 @@
-create table hd_estoque.material (
+create table material (
 	id serial primary key,
 	nome varchar(255) unique not null,
 	descricao text
 );
 
-create table hd_estoque.cor (
+create table cor (
 	id serial primary key,
 	nome varchar(255) unique not null,
 	descricao text
 );
 
-create table hd_estoque.categoria (
+create table categoria (
 	id serial primary key,
 	nome varchar(255) unique not null,
 	descricao text
 );
 
-create table hd_estoque.colecao (
+create table colecao (
 	id serial primary key,
 	nome varchar(255) unique not null,
 	descricao text
 );
 
-create table hd_estoque.produto (
+create table produto (
 	id serial primary key,
 	nome varchar(255) unique not null,
 	id_material int not null,
@@ -32,32 +32,32 @@ create table hd_estoque.produto (
 	preco NUMERIC(5, 2),
 	gasto_material_metro numeric(5,2),
 	
-	constraint fk_material foreign key (id_material) references hd_estoque.material(id),
-	constraint fk_cor foreign key (id_cor) references hd_estoque.cor(id),
-	constraint fk_categoria foreign key (id_categoria) references hd_estoque.categoria(id),
-	constraint fk_colecao foreign key (id_colecao) references hd_estoque.colecao(id)
+	constraint fk_material foreign key (id_material) references material(id),
+	constraint fk_cor foreign key (id_cor) references cor(id),
+	constraint fk_categoria foreign key (id_categoria) references categoria(id),
+	constraint fk_colecao foreign key (id_colecao) references colecao(id)
 );
 
-create table hd_estoque.local_armazenamento (
+create table local_armazenamento (
 	id serial primary key,
 	nome varchar(255) unique not null,
 	descricao text
 );
 
-create table hd_estoque.produto_local_armazenamento (
+create table produto_local_armazenamento (
 	id serial primary key,
 	id_produto int not null,
 	id_local_armazenamento int not null,
 	metros_em_estoque NUMERIC(5, 2) not null default 0.00,
 	
-	constraint fk_produto foreign key (id_produto) references hd_estoque.produto(id),
-	constraint fk_local_armazenamento foreign key (id_local_armazenamento) references hd_estoque.local_armazenamento(id)
+	constraint fk_produto foreign key (id_produto) references produto(id),
+	constraint fk_local_armazenamento foreign key (id_local_armazenamento) references local_armazenamento(id)
 );
 
-drop table hd_estoque.produto_local_armazenamento;
-drop table hd_estoque.local_armazenamento;
-drop table hd_estoque.produto;
-drop table hd_estoque.colecao;
-drop table hd_estoque.categoria;
-drop table hd_estoque.cor;
-drop table hd_estoque.material;
+drop table produto_local_armazenamento;
+drop table local_armazenamento;
+drop table produto;
+drop table colecao;
+drop table categoria;
+drop table cor;
+drop table material;

@@ -7,32 +7,36 @@
     <link rel="stylesheet" href="/css/form.css">
 </head>
 <body>
-    <div class="title-div">
-        <h2>Gerenciamento de Produto</h2>
-    </div>
-    
-    <div class="pesquisa-form-div">
-        <form class="pesquisa-form" id="pesquisa-form">
-            <label for="pesquisa-input">Digite o nome da produto para a pesquisa:</label>
-            <input id="pesquisa-input" class="pesquisa-input">
-
-            <br>
+    <div id="pageDiv">
+        <div class="container-form">
             
-            <button id="pesquisa-button">Pesquisar</button>
-            <button id="cadastrar-button">Cadastrar Produto</button>
-
-            <br>
-            <div id="descricaoPaginaDiv">
-              <p id="descricaoPagina">Para editar ou excluir alguma produto, clique na produto desejada localizada na lista.</p>
+            <div class="title-div">
+                <h2 class="system-title">Gerenciamento de Produto</h2>
             </div>
-            <br>
-        </form>
-    </div>
 
-    <div id="list-div" class="list-div">
-        
+            <div class="pesquisa-form-div">
+                <label class="label" style="width: 100%;">Digite o nome do produto para a pesquisa:</label>
+                
+                <input type="text" class="input" id="pesquisaInput">
+                
+                <div class="button-container" style="width: 100%; margin-top: 10px;">
+                    
+                    <button type="button" class="submit-button" style="width: auto; padding: 0 20px;" id="pesquisarBtn">Pesquisar</button>
+                    
+                    <button type="button" class="submit-button" style="width: auto; padding: 0 20px;" id="cadastrar-button">Cadastrar Produto</button>
+                </div>
+            </div>
+
+            <div id="descricaoPaginaDiv">
+                Para editar ou excluir algum produto, clique no produto desejado localizado na lista.
+            </div>
+
+            <div class="list-div" id="list-div">
+                
+            </div>
+
+        </div>
     </div>
-    <br>
 
     <script src="/js/produto/gerenciamentoProduto.js"></script>
 </body>
