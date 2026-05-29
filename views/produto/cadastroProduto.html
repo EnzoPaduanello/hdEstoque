@@ -7,7 +7,35 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/css/form.css">
 </head>
+    <script src="/js/nav.js"></script>
 <body>
+    <!-- Navigation Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <!-- Brand/Logo Area -->
+            <a href="/" class="nav-brand">
+                Simone Paduanello <span>Home Decor</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="nav-menu" id="nav-menu">
+                <a href="/produto" class="nav-link">Produtos</a>
+                <a href="/material" class="nav-link">Materiais</a>
+                <a href="/cor" class="nav-link">Cores</a>
+                <a href="/categoria" class="nav-link">Categorias</a>
+                <a href="/colecao" class="nav-link">Coleções</a>
+                <a href="/localArmazenamento" class="nav-link">Locais</a>
+            </nav>
+
+            <!-- Hamburger Button for Mobile -->
+            <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
     <form id="cadastroForm" class="form" method="post">
         <div class="container-form">
             <div class="content">
@@ -67,9 +95,43 @@
                     </div>
                 </div>
 
+                <!-- Estratégia de Preço Integrada -->
+                <div class="input-group" style="margin-top: 30px; padding-top: 20px; border-top: 1px dashed #D2D9D3;">
+                    <label class="label">Método de Precificação</label>
+                    
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="tipoPreco" id="radioCalculado" value="calculado" checked> 
+                            Preço Sugerido (Calculado)
+                        </label>
+                        <label>
+                            <input type="radio" name="tipoPreco" id="radioPersonalizado" value="personalizado"> 
+                            Preço Manual
+                        </label>
+                    </div>
+
+                    <!-- Campos de Cálculo (Visíveis apenas quando "Calculado" está selecionado) -->
+                    <div id="calculo-container" class="calculo-container">
+                        <div class="campo-linha">
+                            <label for="custoMaterialCalculo" class="label" style="font-size: 13px;">Custo Material (R$)</label>
+                            <input id="custoMaterialCalculo" class="input" style="width: 100%;" type="number" step="0.01" min="0" placeholder="Ex: 8.00">
+                        </div>
+                        <div class="campo-linha">
+                            <label for="tempoProducaoCalculo" class="label" style="font-size: 13px;">Tempo (Minutos)</label>
+                            <input id="tempoProducaoCalculo" class="input" style="width: 100%;" type="number" min="0" placeholder="Ex: 20">
+                        </div>
+                        <div class="campo-linha">
+                            <label for="valorHoraCalculo" class="label" style="font-size: 13px;">Valor/Hora (R$)</label>
+                            <input id="valorHoraCalculo" class="input" style="width: 100%;" type="number" step="0.01" min="0" placeholder="Ex: 20.00">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- O Input de Preço Original Modificado -->
                 <div class="input-group">
-                    <label for="precoInput" class="label">Preço</label>
-                    <input id="precoInput" class="input" type="number" step="0.01" min="0" placeholder="0.00">
+                    <label for="precoInput" class="label">Preço Final de Venda (R$)</label>
+                    <input id="precoInput" class="input" type="number" step="0.01" min="0" placeholder="0.00" readonly style="background-color: #F4F6F4; font-weight: bold; font-size: 18px;">
+                    <small id="dicaPreco" style="display: block; margin-top: 8px; color: #6B7F72; font-weight: 600; text-align: center; font-size: 14px;"></small>
                 </div>
 
                 <div class="input-group">

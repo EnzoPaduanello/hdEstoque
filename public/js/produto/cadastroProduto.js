@@ -25,6 +25,69 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     });
 
+    // --- INÍCIO DA LÓGICA DE PREÇO ---
+    const radioCalculado = document.getElementById('radioCalculado');
+    const radioPersonalizado = document.getElementById('radioPersonalizado');
+    const calculoContainer = document.getElementById('calculo-container');
+    const precoInput = document.getElementById('precoInput');
+    
+    const custoMaterialCalculo = document.getElementById('custoMaterialCalculo');
+    const tempoProducaoCalculo = document.getElementById('tempoProducaoCalculo');
+    const valorHoraCalculo = document.getElementById('valorHoraCalculo');
+    const dicaPreco = document.getElementById('dicaPreco');
+
+    function calcularPrecoSugestao() {
+        if (radioPersonalizado && radioPersonalizado.checked) return;
+
+        const custoMat = parseFloat(custoMaterialCalculo?.value) || 0;
+        const tempo = parseFloat(tempoProducaoCalculo?.value) || 0;
+        const valorHora = parseFloat(valorHoraCalculo?.value) || 0;
+
+        const custoMaoDeObra = (tempo / 60) * valorHora;
+        const custoBase = custoMat + custoMaoDeObra;
+        const precoSugerido = custoBase * 2; 
+
+        if (precoInput) precoInput.value = precoSugerido.toFixed(2);
+        
+        if (dicaPreco) {
+            if (custoBase > 0) {
+                dicaPreco.textContent = `Custo Base da Peça: R$ ${custoBase.toFixed(2)}`;
+            } else {
+                dicaPreco.textContent = '';
+            }
+        }
+    }
+
+    if (custoMaterialCalculo && tempoProducaoCalculo && valorHoraCalculo) {
+        [custoMaterialCalculo, tempoProducaoCalculo, valorHoraCalculo].forEach(input => {
+            input.addEventListener('input', calcularPrecoSugestao);
+        });
+    }
+
+    if (radioCalculado) {
+        radioCalculado.addEventListener('change', () => {
+            if (calculoContainer) calculoContainer.style.display = 'flex';
+            if (precoInput) {
+                precoInput.readOnly = true;
+                precoInput.style.backgroundColor = '#F4F6F4';
+            }
+            calcularPrecoSugestao();
+        });
+    }
+
+    if (radioPersonalizado) {
+        radioPersonalizado.addEventListener('change', () => {
+            if (calculoContainer) calculoContainer.style.display = 'none';
+            if (precoInput) {
+                precoInput.readOnly = false;
+                precoInput.style.backgroundColor = '#FFFFFF';
+                precoInput.focus();
+            }
+            if (dicaPreco) dicaPreco.textContent = 'Modo manual ativo. Digite o preço desejado.';
+        });
+    }
+    // --- FIM DA LÓGICA DE PREÇO ---
+
     const form = document.getElementById('cadastroForm');
 
     await criarOpcoes();
@@ -63,7 +126,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 throw new Error('Erro ao cadastrar produto');
             }
 
-            const result = await response.json(); // Resposta do servidor
+            const result = await response.json(); 
             
             console.log('Sucesso:', result);
             alert('Produto cadastrado com sucesso!');
@@ -82,13 +145,9 @@ async function criarOpcoes() {
 }
 
 function criarOpcoesMaterial() {
-    // Lógica para criar opções do material
-    fetch('/api/material', {
-    })
+    fetch('/api/material', {})
     .then(response => {
-        if(!response.ok) {
-            throw new Error('Falha ao carregar materiais: ' + response.statusText);
-        }
+        if(!response.ok) throw new Error('Falha ao carregar materiais: ' + response.statusText);
         return response.json();
     })
     .then(data => {
@@ -105,13 +164,9 @@ function criarOpcoesMaterial() {
 };
 
 function criarOpcoesCor() {
-    // Lógica para criar opções do cor
-    fetch('/api/cor', {
-    })
+    fetch('/api/cor', {})
     .then(response => {
-        if(!response.ok) {
-            throw new Error('Falha ao carregar cores: ' + response.statusText);
-        }
+        if(!response.ok) throw new Error('Falha ao carregar cores: ' + response.statusText);
         return response.json();
     })
     .then(data => {
@@ -128,13 +183,9 @@ function criarOpcoesCor() {
 };
 
 function criarOpcoesCategoria() {
-    // Lógica para criar opções do categoria
-    fetch('/api/categoria', {
-    })
+    fetch('/api/categoria', {})
     .then(response => {
-        if(!response.ok) {
-            throw new Error('Falha ao carregar categorias: ' + response.statusText);
-        }
+        if(!response.ok) throw new Error('Falha ao carregar categorias: ' + response.statusText);
         return response.json();
     })
     .then(data => {
@@ -151,13 +202,9 @@ function criarOpcoesCategoria() {
 };
 
 function criarOpcoesColecao() {
-    // Lógica para criar opções de coleção
-    fetch('/api/colecao', {
-    })
+    fetch('/api/colecao', {})
     .then(response => {
-        if(!response.ok) {
-            throw new Error('Falha ao carregar colecaos: ' + response.statusText);
-        }
+        if(!response.ok) throw new Error('Falha ao carregar colecaos: ' + response.statusText);
         return response.json();
     })
     .then(data => {

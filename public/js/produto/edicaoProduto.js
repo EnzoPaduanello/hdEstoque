@@ -27,6 +27,69 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     });
 
+    // --- INÍCIO DA LÓGICA DE PREÇO ---
+    const radioCalculado = document.getElementById('radioCalculado');
+    const radioPersonalizado = document.getElementById('radioPersonalizado');
+    const calculoContainer = document.getElementById('calculo-container');
+    const precoInput = document.getElementById('precoInput');
+    
+    const custoMaterialCalculo = document.getElementById('custoMaterialCalculo');
+    const tempoProducaoCalculo = document.getElementById('tempoProducaoCalculo');
+    const valorHoraCalculo = document.getElementById('valorHoraCalculo');
+    const dicaPreco = document.getElementById('dicaPreco');
+
+    function calcularPrecoSugestao() {
+        if (radioPersonalizado && radioPersonalizado.checked) return;
+
+        const custoMat = parseFloat(custoMaterialCalculo?.value) || 0;
+        const tempo = parseFloat(tempoProducaoCalculo?.value) || 0;
+        const valorHora = parseFloat(valorHoraCalculo?.value) || 0;
+
+        const custoMaoDeObra = (tempo / 60) * valorHora;
+        const custoBase = custoMat + custoMaoDeObra;
+        const precoSugerido = custoBase * 2; 
+
+        if (precoInput) precoInput.value = precoSugerido.toFixed(2);
+        
+        if (dicaPreco) {
+            if (custoBase > 0) {
+                dicaPreco.textContent = `Custo Base da Peça: R$ ${custoBase.toFixed(2)}`;
+            } else {
+                dicaPreco.textContent = '';
+            }
+        }
+    }
+
+    if (custoMaterialCalculo && tempoProducaoCalculo && valorHoraCalculo) {
+        [custoMaterialCalculo, tempoProducaoCalculo, valorHoraCalculo].forEach(input => {
+            input.addEventListener('input', calcularPrecoSugestao);
+        });
+    }
+
+    if (radioCalculado) {
+        radioCalculado.addEventListener('change', () => {
+            if (calculoContainer) calculoContainer.style.display = 'flex';
+            if (precoInput) {
+                precoInput.readOnly = true;
+                precoInput.style.backgroundColor = '#F4F6F4';
+            }
+            calcularPrecoSugestao();
+        });
+    }
+
+    if (radioPersonalizado) {
+        radioPersonalizado.addEventListener('change', () => {
+            if (calculoContainer) calculoContainer.style.display = 'none';
+            if (precoInput) {
+                precoInput.readOnly = false;
+                precoInput.style.backgroundColor = '#FFFFFF';
+                precoInput.focus();
+            }
+            if (dicaPreco) dicaPreco.textContent = 'Modo manual ativo. Digite o preço desejado.';
+        });
+    }
+    // --- FIM DA LÓGICA DE PREÇO ---
+
     const form = document.getElementById('edicaoForm');
     const idProduto = getUrlParametro('id');
 
@@ -35,14 +98,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     const produto = await buscarDadosProduto(idProduto);
     await carregarDadosProduto(produto);
     
-    // 2. CARREGA O ESTOQUE JÁ EXISTENTE (NOVA FUNÇÃO)
+    // 2. CARREGA O ESTOQUE JÁ EXISTENTE 
     await carregarEstoqueExistente(idProduto);
 
     // 3. Configura botão de adicionar (Cards NOVOS)
     const btnAdicionar = document.getElementById('adicionar-local-button');
     if(btnAdicionar){
         btnAdicionar.addEventListener('click', function() {
-            // Passamos null no ID para indicar que é novo
             desenharCard(null, null, 0); 
         });
     }
@@ -51,7 +113,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     form.addEventListener('submit', async function (event) {
         event.preventDefault();
 
-        // Pega dados básicos
         const nome = document.getElementById('nomeInput').value.trim().toUpperCase();
         const material = document.getElementById('materialSelect').value;
         const cor = document.getElementById('corSelect').value;
@@ -60,24 +121,20 @@ document.addEventListener('DOMContentLoaded', async function() {
         const preco = document.getElementById('precoInput').valueAsNumber;
         const gasto = document.getElementById('gastoMaterialInput').valueAsNumber;
 
-        // --- LÓGICA DE SEPARAÇÃO DE ESTOQUE ---
         const novosEstoques = [];
         const estoquesEditados = [];
 
-        // Varre todos os cards na tela
         document.querySelectorAll('.card-local').forEach(card => {
-            const idRelacao = card.dataset.idRelacao; // Pega o ID salvo no HTML (se existir)
+            const idRelacao = card.dataset.idRelacao; 
             const inputQtd = card.querySelector('.input-estoque');
             const quantidade = inputQtd.valueAsNumber;
 
             if (idRelacao && idRelacao !== "novo") {
-                // É um card EXISTENTE que foi carregado do banco (vamos atualizar a qtd)
                 estoquesEditados.push({
                     id_relacao: idRelacao,
                     quantidade: quantidade
                 });
             } else {
-                // É um card NOVO (tem select)
                 const selectLocal = card.querySelector('.select-local');
                 if (selectLocal && selectLocal.value) {
                     novosEstoques.push({
@@ -96,8 +153,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             idColecao: colecao,
             preco,
             gastoMaterialMetro: gasto,
-            novosEstoques,     // Envia array de novos
-            estoquesEditados   // Envia array de edições
+            novosEstoques,     
+            estoquesEditados   
         };
 
         try{
@@ -110,7 +167,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             if (!response.ok) throw new Error('Erro ao salvar');
             
             alert('Produto e estoques atualizados!');
-            location.reload(); // Recarrega para limpar os "novos" e virarem "existentes"
+            location.reload(); 
         } catch (error) {
             console.error(error);
             alert('Erro ao salvar.');
@@ -118,7 +175,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     })
 
     document.getElementById('delete-button').addEventListener('click', async function() {
-        if(!confirm("Tem certeza que deseja deletar este produto? Esta ação não pode ser desfeita."));
+        if(!confirm("Tem certeza que deseja deletar este produto? Esta ação não pode ser desfeita.")) return;
         try {
             const response = await fetch(`/api/produto/${idProduto}`, {
                 method: 'DELETE'
@@ -140,16 +197,10 @@ async function buscarDadosProduto(idProduto) {
     try{
         const response = await fetch(`/api/produto/${idProduto}`, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            headers: { 'Content-Type': 'application/json' }
         });
-        if (!response.ok) {
-            throw new Error('Erro ao buscar produto');
-        }
-        const produto = await response.json(); // Resposta do servidor
-        
-        return produto;
+        if (!response.ok) throw new Error('Erro ao buscar produto');
+        return await response.json(); 
     } catch (error) {
         console.error('Erro na requisição:', error);
         alert('Falha ao conectar com o servidor.');
@@ -158,6 +209,14 @@ async function buscarDadosProduto(idProduto) {
 
 async function carregarDadosProduto(produto) {
     document.getElementById('nomeInput').value = produto.nome;
+    
+    // --- NOVO: Ativar modo manual para não perder o preço do banco ---
+    const radioPersonalizado = document.getElementById('radioPersonalizado');
+    if (radioPersonalizado) {
+        radioPersonalizado.checked = true;
+        radioPersonalizado.dispatchEvent(new Event('change'));
+    }
+    
     document.getElementById('precoInput').value = produto.preco;
     document.getElementById('gastoMaterialInput').value = produto.gastoMaterialMetro;
 
@@ -168,13 +227,9 @@ async function carregarDadosProduto(produto) {
 };
 
 function criarOpcoesMaterial(idMaterial) {
-    // Lógica para criar opções do material
-    fetch('/api/material', {
-    })
+    fetch('/api/material', {})
     .then(response => {
-        if(!response.ok) {
-            throw new Error('Falha ao carregar materiais: ' + response.statusText);
-        }
+        if(!response.ok) throw new Error('Falha ao carregar materiais: ' + response.statusText);
         return response.json();
     })
     .then(data => {
@@ -183,11 +238,7 @@ function criarOpcoesMaterial(idMaterial) {
             const option = document.createElement('option');
             option.value = material.id;
             option.textContent = material.nome;
-
-            if(material.id === idMaterial) {
-                option.selected = true;
-            }
-
+            if(material.id === idMaterial) option.selected = true;
             materialSelect.add(option);
         });
     })
@@ -198,13 +249,9 @@ function criarOpcoesMaterial(idMaterial) {
 };
 
 function criarOpcoesCor(idCor) {
-    // Lógica para criar opções do cor
-    fetch('/api/cor', {
-    })
+    fetch('/api/cor', {})
     .then(response => {
-        if(!response.ok) {
-            throw new Error('Falha ao carregar cores: ' + response.statusText);
-        }
+        if(!response.ok) throw new Error('Falha ao carregar cores: ' + response.statusText);
         return response.json();
     })
     .then(data => {
@@ -213,11 +260,7 @@ function criarOpcoesCor(idCor) {
             const option = document.createElement('option');
             option.value = cor.id;
             option.textContent = cor.nome;
-
-            if(cor.id === idCor) {
-                option.selected = true;
-            }
-
+            if(cor.id === idCor) option.selected = true;
             corSelect.add(option);
         });
     })
@@ -228,13 +271,9 @@ function criarOpcoesCor(idCor) {
 };
 
 function criarOpcoesCategoria(idCategoria) {
-    // Lógica para criar opções do categoria
-    fetch('/api/categoria', {
-    })
+    fetch('/api/categoria', {})
     .then(response => {
-        if(!response.ok) {
-            throw new Error('Falha ao carregar categorias: ' + response.statusText);
-        }
+        if(!response.ok) throw new Error('Falha ao carregar categorias: ' + response.statusText);
         return response.json();
     })
     .then(data => {
@@ -243,11 +282,7 @@ function criarOpcoesCategoria(idCategoria) {
             const option = document.createElement('option');
             option.value = categoria.id;
             option.textContent = categoria.nome;
-
-            if(categoria.id === idCategoria) {
-                option.selected = true;
-            }
-
+            if(categoria.id === idCategoria) option.selected = true;
             categoriaSelect.add(option);
         });
     })
@@ -258,13 +293,9 @@ function criarOpcoesCategoria(idCategoria) {
 };
 
 function criarOpcoesColecao(idColecao) {
-    // Lógica para criar opções de coleção
-    fetch('/api/colecao', {
-    })
+    fetch('/api/colecao', {})
     .then(response => {
-        if(!response.ok) {
-            throw new Error('Falha ao carregar colecaos: ' + response.statusText);
-        }
+        if(!response.ok) throw new Error('Falha ao carregar colecaos: ' + response.statusText);
         return response.json();
     })
     .then(data => {
@@ -273,11 +304,7 @@ function criarOpcoesColecao(idColecao) {
             const option = document.createElement('option');
             option.value = colecao.id;
             option.textContent = colecao.nome;
-
-            if(colecao.id === idColecao) {
-                option.selected = true;
-            }
-
+            if(colecao.id === idColecao) option.selected = true;
             colecaoSelect.add(option);
         });
     })
@@ -292,7 +319,6 @@ function getUrlParametro(parametroNome) {
     return urlParams.get(parametroNome);
 }
 
-// Função que busca os locais na API e guarda na variável
 async function carregarLocaisParaMemoria() {
     try {
         const response = await fetch('/api/localArmazenamento');
@@ -310,8 +336,6 @@ async function carregarEstoqueExistente(idProduto) {
         const estoqueLista = await response.json();
 
         estoqueLista.forEach(item => {
-            // Chama a função de desenho passando os dados do banco
-            // item.local.nome vem do include no Controller
             desenharCard(item.id, item.local.nome, item.metrosEmEstoque);
         });
     } catch (error) {
@@ -319,16 +343,14 @@ async function carregarEstoqueExistente(idProduto) {
     }
 }
 
-// Função que cria o Card na tela
 function desenharCard(idRelacaoBanco, nomeLocalExistente, quantidade) {
     const container = document.getElementById('locais-container');
-    const idUnico = Date.now() + Math.random().toString(16).slice(2); // ID único pro HTML
+    const idUnico = Date.now() + Math.random().toString(16).slice(2); 
     
     const card = document.createElement('div');
     card.className = 'card-local';
     card.id = `card-${idUnico}`;
     
-    // Se tiver idRelacaoBanco, guardamos no dataset para saber depois
     if (idRelacaoBanco) {
         card.dataset.idRelacao = idRelacaoBanco;
     } else {
@@ -338,9 +360,7 @@ function desenharCard(idRelacaoBanco, nomeLocalExistente, quantidade) {
     let htmlConteudoLocal = '';
     let htmlBotaoDelete = '';
 
-    // --- CENÁRIO 1: RELAÇÃO JÁ EXISTE (Vem do Banco) ---
     if (idRelacaoBanco) {
-        // Apenas Texto (sem Select)
         htmlConteudoLocal = `
             <div class="campo-linha" style="flex-grow: 4; justify-content: center;">
                 <label class="label" style="font-size: 14px; margin-bottom: 2px; color: #666;">Local Cadastrado:</label>
@@ -350,7 +370,6 @@ function desenharCard(idRelacaoBanco, nomeLocalExistente, quantidade) {
             </div>
         `;
         
-        // Botão que DELETA DO BANCO
         htmlBotaoDelete = `
             <button type="button" class="btn-remover-linha" 
                 onclick="deletarRelacaoBanco('${idRelacaoBanco}', '${idUnico}')" 
@@ -359,10 +378,7 @@ function desenharCard(idRelacaoBanco, nomeLocalExistente, quantidade) {
             </button>
         `;
 
-    } 
-    // --- CENÁRIO 2: NOVO CARD (Criado pelo botão) ---
-    else {
-        // Select normal
+    } else {
         let optionsHtml = '<option></option>';
         locaisDisponiveis.forEach(local => {
             optionsHtml += `<option value="${local.id}">${local.nome}</option>`;
@@ -377,7 +393,6 @@ function desenharCard(idRelacaoBanco, nomeLocalExistente, quantidade) {
             </div>
         `;
 
-        // Botão que APENAS REMOVE DO HTML
         htmlBotaoDelete = `
             <button type="button" class="btn-remover-linha" 
                 onclick="removerCardVisual('${idUnico}')" 
@@ -387,7 +402,6 @@ function desenharCard(idRelacaoBanco, nomeLocalExistente, quantidade) {
         `;
     }
 
-    // Monta o HTML Final
     card.innerHTML = `
         ${htmlConteudoLocal}
 
@@ -401,7 +415,6 @@ function desenharCard(idRelacaoBanco, nomeLocalExistente, quantidade) {
 
     container.appendChild(card);
 
-    // Se for novo, ativa o Select2
     if (!idRelacaoBanco) {
         $(`#select-local-${idUnico}`).select2({
             placeholder: "Selecione um local",
@@ -431,7 +444,6 @@ window.deletarRelacaoBanco = async function(idRelacao, idCardHtml) {
     }
 }
 
-// Função para remover visualmente (usada no botão X dos itens novos)
 window.removerCardVisual = function(idCardHtml) {
     const card = document.getElementById(`card-${idCardHtml}`);
     if (card) card.remove();

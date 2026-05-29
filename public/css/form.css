@@ -421,3 +421,200 @@ button.delete-button-icon:hover img {
     background-color: #B56D56;
     transform: translateY(-2px);
 }
+
+/* =========================================
+   Pricing Calculator Styles
+   ========================================= */
+
+.radio-group {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.radio-group label {
+    font-size: 16px;
+    color: #4A574E;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.radio-group input[type="radio"] {
+    accent-color: #6B7F72; /* Changes the radio button color to your Sage Green */
+    transform: scale(1.2);  
+}
+
+.calculo-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+    background-color: #FAFAFA;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px dashed #6B7F72;
+    box-shadow: inset 0px 2px 5px rgba(0,0,0,0.02);
+}
+
+.calculo-container .campo-linha {
+    flex: 1;
+    min-width: 120px;
+}
+
+/* =========================================
+   Header Navigation & Hamburger Menu
+   ========================================= */
+
+.site-header {
+    width: 100%;
+    background-color: #FAFAFA; /* Crisp linen white */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 4px solid #D1846A; /* Terracotta accent */
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Brand Styling */
+.nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #2C352E;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.nav-brand span {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: #7D8C81;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Desktop Navigation */
+.nav-menu {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #4A574E;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    padding: 10px 0;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: #D1846A; /* Terracotta hover */
+}
+
+/* Animated underline on hover */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #D1846A;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Hamburger Button (Hidden on Desktop) */
+.hamburger-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001; /* Keeps it above the mobile menu */
+}
+
+.hamburger-btn .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: #2C352E;
+    border-radius: 3px;
+}
+
+/* =========================================
+   Mobile Responsiveness (Hamburger Logic)
+   ========================================= */
+
+@media (max-width: 850px) {
+    .hamburger-btn {
+        display: block;
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px; /* Right below the header */
+        flex-direction: column;
+        background-color: #FAFAFA;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        padding: 20px 0;
+        gap: 0;
+        border-bottom: 4px solid #D1846A;
+    }
+
+    .nav-menu.active {
+        left: 0; /* Slides the menu in */
+    }
+
+    .nav-link {
+        display: block;
+        padding: 15px 20px;
+        font-size: 18px;
+        border-bottom: 1px solid #E5EBE6;
+    }
+
+    .nav-link::after {
+        display: none; /* Removes the underline animation on mobile */
+    }
+
+    /* Hamburger Animation to 'X' */
+    .hamburger-btn.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger-btn.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger-btn.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
